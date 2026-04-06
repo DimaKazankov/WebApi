@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nginx-app
+  name: webapp
   namespace: argocd
   annotations:
     argocd-image-updater.argoproj.io/image-list: app=localhost:5000/webapi
     argocd-image-updater.argoproj.io/app.update-strategy: semver
-    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/image-updater-gitea-creds
-    argocd-image-updater.argoproj.io/git-branch: main
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/github-repo-creds
+    argocd-image-updater.argoproj.io/git-branch: master
 spec:
   project: default
   source:
-    repoURL: http://gitea-http.gitea.svc.cluster.local:3000/gitops-user/manifests.git
-    targetRevision: main
-    path: .
+    repoURL: https://github.com/DimaKazankov/WebApi.git
+    targetRevision: master
+    path: manifest
   destination:
     server: https://kubernetes.default.svc
     namespace: default

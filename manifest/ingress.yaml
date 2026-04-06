@@ -1,19 +1,19 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nginx-app
+  name: webapp
   labels:
-    app: nginx-app
+    app: webapp
 spec:
   ingressClassName: nginx
   rules:
-  - host: nginx.localhost
+  - host: webapp.localhost
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: nginx-app
+            name: webapp
             port:
               number: 80
